@@ -2,6 +2,8 @@
 
 using System;
 
+using Volume_Calculator.Utilities;
+
 #endregion
 
 namespace Volume_Calculator // Grouping classes in to folders the more you have later keeps architecture clean.
@@ -9,43 +11,11 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
     /// <summary>The <see cref="Program"/> class.</summary>
     internal class Program
     {
-        #region Constants
-
-        /// <summary>The console title.</summary>
-        private const string CONSOLE_TITLE = "Volume Calculator";
-
-        /// <summary>The exit code message.</summary>
-        private const string EXIT_CODE_MESSAGE = "Press any Key to Exit...";
-
-        /// <summary>The height.</summary>
-        private const string HEIGHT = "Height";
-
-        /// <summary>The input was invalid and requires a number.</summary>
-        private const string INVALID_NUMERIC_INPUT = "Please only input numerical values. [0-9]";
-
-        /// <summary>The request input.</summary>
-        private const string REQUEST_INPUT = "Please enter the";
-
-        /// <summary>The volume.</summary>
-        private const string VOLUME = "Volume";
-
-        /// <summary>The width.</summary>
-        private const string WIDTH = "Width";
-
-        #endregion
+      
 
         #region Methods
 
-        /// <summary>Calculates the volume.</summary>
-        /// <param name="width">The width.</param>
-        /// <param name="height">The height.</param>
-        /// <returns>System.Int32.</returns>
-        private static int CalculateVolume(int width, int height)
-        {
-            int volume = width * height;
 
-            return volume;
-        }
 
         /// <summary>The intro to this application.</summary>
         /// <param name="back">The back.</param>
@@ -53,14 +23,14 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
         private static void Intro(ConsoleColor back, ConsoleColor front)
         {
             // Assign the console title
-            Console.Title = CONSOLE_TITLE;
+            Console.Title = Constants.CONSOLE_TITLE;
 
             // Customize the console with your colors
             Console.BackgroundColor = back;
             Console.ForegroundColor = front; // This allows customization of colors without giving perma-defautl!
 
             // Introduction
-            Console.WriteLine("Purpose: This application will to calculate the " + VOLUME + " of your dimensions.");
+            Console.WriteLine("Purpose: This application will to calculate the " + Constants.VOLUME + " of your dimensions.");
             Console.WriteLine(string.Empty);
 
             // Insert other intro text after...
@@ -82,13 +52,13 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
             int volume = 0;
 
             // Request the users input for width and height to calculate the volume of the dimensions.
-            Console.WriteLine(REQUEST_INPUT + " fields below to find the " + VOLUME + ".");
+            Console.WriteLine(Constants.REQUEST_INPUT + " fields below to find the " + Constants.VOLUME + ".");
             Console.WriteLine(string.Empty);
 
             // WIDTH ------------------
 
             // Request user input
-            Console.Write(REQUEST_INPUT + " " + WIDTH + ": ");
+            Console.Write(Constants.REQUEST_INPUT + " " + Constants.WIDTH + ": ");
 
             // Reads the input line as a string into w.
             string _width = Console.ReadLine();
@@ -98,18 +68,18 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
             {
                 // Conversion from text to number passed.
                 width = result;
-                Console.WriteLine("Registered the " + WIDTH + ": " + width);
+                Console.WriteLine("Registered the " + Constants.WIDTH + ": " + width);
                 Console.WriteLine(string.Empty);
             }
             else if (string.IsNullOrEmpty(_width)) // Checks the _width is not an empty space or a null
             {
                 // Let the user know only numbers are allowed no empty spaces.
-                Console.WriteLine(INVALID_NUMERIC_INPUT);
+                Console.WriteLine(Constants.INVALID_NUMERIC_INPUT);
             }
             else // Conversion from text to number failed.
             {
                 // Let the user know only numbers are allowed.
-                Console.WriteLine(INVALID_NUMERIC_INPUT);
+                Console.WriteLine(Constants.INVALID_NUMERIC_INPUT);
             }
 
             // TODO: Create a loop so the user has no choice to continue until we get a number
@@ -128,10 +98,14 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
 
             Console.WriteLine("You have entered the height: " + height);
 
-            // DO THE MATH
+         
 
-            // Find the volume with basic math
-            volume = width * height;
+
+  // Find the volume with basic math
+            volume = MathUtilities.CalculateVolume(2,2);
+
+          
+       
 
             // Output the values to console
             Console.WriteLine(string.Empty);
@@ -148,7 +122,7 @@ namespace Volume_Calculator // Grouping classes in to folders the more you have 
 
             // Wait for user input before exiting the code.
 
-            Console.WriteLine(EXIT_CODE_MESSAGE);
+            Console.WriteLine(Constants.EXIT_CODE_MESSAGE);
 
             Console.Read();
         } // Your code ends here
